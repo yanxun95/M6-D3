@@ -17,14 +17,15 @@ router
                     ? {
                         [Op.or]: [
                             { name: { [Op.iLike]: `%${req.query.search}%` } },
-                            { category: { [Op.iLike]: `%${req.query.search}%` } }
+                            { category: { [Op.iLike]: `%${req.query.search}%` } },
+                            { price: { [Op.eq]: `${req.query.search}` } }
                         ],
                     }
                     : {},
 
                 // where: req.query.price
                 //     ?
-                //     { price: { [Op.iLike]: `${req.query.price}%` } }
+                //     { price: { [Op.eq]: `${req.query.price}` } }
                 //     : {},
             });
             res.send(data)

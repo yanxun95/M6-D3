@@ -17,7 +17,7 @@ const testDB = async () => {
     }
 };
 
-testDB();
+// testDB();
 
 export const connectDB = async () => {
     try {

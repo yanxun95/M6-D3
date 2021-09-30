@@ -2,7 +2,7 @@
 import express from "express";
 import db from "../../db/models/index.js";
 const router = express.Router();
-const { Product, Review } = db;
+const { Product, Review, Category, categoryProduct } = db;
 import s from "sequelize";
 const { Op } = s;
 
@@ -11,7 +11,7 @@ router
     .get(async (req, res, next) => {
         try {
             const data = await Product.findAll({
-                include: Review,
+                include: [Review, { model: Category, through: { attributes: [] } }],
 
                 where: req.query.search
                     ? {
@@ -84,8 +84,18 @@ router
             console.log(error)
             res.status(500).send(error)
         }
-    });
+    })
 
+    .post(async (req, res, next) => {
+        try {
+            const body = { categoryId: req.body.categoryId, productId: req.params.id }
+            const data = await categoryProduct.create(body);
+            res.send(data);
+        } catch (error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
+    });
 
 
 export default router;

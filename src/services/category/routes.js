@@ -2,14 +2,15 @@
 import express from "express";
 import db from "../../db/models/index.js";
 const router = express.Router();
-const { Product, Review } = db;
+const { Category } = db;
+import s from "sequelize";
+const { Op } = s;
 
 router
     .route("/")
     .get(async (req, res, next) => {
         try {
-            const data = await Review.findAll({
-
+            const data = await Category.findAll({
             });
             res.send(data)
         } catch (error) {
@@ -20,7 +21,8 @@ router
 
     .post(async (req, res, next) => {
         try {
-            const data = await Review.create(req.body);
+            console.log(req.body)
+            const data = await Category.create(req.body);
             res.send(data);
         } catch (error) {
             console.log(error)
@@ -32,7 +34,7 @@ router
     .route("/:id")
     .get(async (req, res, next) => {
         try {
-            const data = await Review.findByPk(req.params.id);
+            const data = await Category.findByPk(req.params.id);
             res.send(data)
         } catch (error) {
             console.log(error)
@@ -42,7 +44,7 @@ router
 
     .put(async (req, res, next) => {
         try {
-            const data = await Review.update(req.body, {
+            const data = await Category.update(req.body, {
                 where: {
                     id: req.params.id,
                 },
@@ -57,7 +59,7 @@ router
 
     .delete(async (req, res, next) => {
         try {
-            const rows = await Review.destroy({ where: { id: req.params.id } });
+            const rows = await Category.destroy({ where: { id: req.params.id } });
             if (rows > 0) {
                 res.send("ok");
             } else {

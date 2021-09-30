@@ -3,27 +3,20 @@ import sequelize from "../index.js";
 import s from "sequelize";
 const { DataTypes } = s;
 
-const Product = sequelize.define(
-    "product",
+const Category = sequelize.define(
+    "category",
     {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,
             autoIncrement: true,
         },
-        name: {
+        categoryName: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        image: {
-            type: DataTypes.STRING,
-            defaultValue: "https://image.url",
-        },
-        price: {
-            type: DataTypes.FLOAT,
         }
     },
 
 );
 
-export default Product;
+export default Category;

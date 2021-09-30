@@ -1,16 +1,16 @@
 import Product from "./products.js";
 import Review from "./reviews.js";
-
-//1. choose the type of relationship (1:1, 1:n, n:m)
-// 1:n
-
-// 2. understand what methods to use for this specific type of relationship
-// hasMany & belongsTo
-
-//3. understand for each association which model is TARGET & which model is SOURCE
-// A.hasMany(B) => foreign key in the the TARGET B model
+import User from "./user.js";
+import Category from "./category.js";
+import categoryProduct from "./categoryProduct.js"
 
 Product.hasMany(Review);
 Review.belongsTo(Product);
 
-export default { Product, Review };
+User.hasMany(Review);
+Review.belongsTo(User);
+
+Category.belongsToMany(Product, { through: "categoryProduct" });
+Product.belongsToMany(Category, { through: "categoryProduct" });
+
+export default { Product, Review, User, Category, categoryProduct };

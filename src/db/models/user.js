@@ -3,27 +3,24 @@ import sequelize from "../index.js";
 import s from "sequelize";
 const { DataTypes } = s;
 
-const Product = sequelize.define(
-    "product",
+const User = sequelize.define(
+    "user",
     {
         id: {
             primaryKey: true,
             type: DataTypes.INTEGER,
             autoIncrement: true,
         },
-        name: {
+        first_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        image: {
+        last_name: {
             type: DataTypes.STRING,
-            defaultValue: "https://image.url",
-        },
-        price: {
-            type: DataTypes.FLOAT,
+            allowNull: false,
         }
     },
 
 );
 
-export default Product;
+export default User;
